@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import {User} from "../model/userModel.js";
 
-
+// To protect routes that require authentication
 export const authMiddleware=async(req,res,next)=>{
     try{
         const {token}=req.cookies.token;
