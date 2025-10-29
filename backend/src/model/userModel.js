@@ -14,7 +14,7 @@ const userSchema=mongoose.Schema({
     password:{
         type:String,
         required:true,
-        minlength:8,
+        minlength:4,
     },
     profilepic:{
         type:String,
