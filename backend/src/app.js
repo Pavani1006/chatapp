@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import authRoute from './routes/authRoute.js';
+import messageRoute from './routes/messageRoute.js';
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 app.use("/api/auth", authRoute);
+app.use("/api/message", messageRoute);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
