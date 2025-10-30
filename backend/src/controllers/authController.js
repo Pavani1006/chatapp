@@ -65,8 +65,20 @@ export const logout = (req, res) => {
 }   
 
 export const editProfile=async(req,res)=>{
-    const {userName,email}=req.body;
-    // try{
-
-    // }
+    try{
+        const {profilepic}=req.body;
+        const userId=req.user._id;
+        if(!profilepic){
+            return res.status(400).json({message:"Profile picture is required"});
+        }
+        const uploadImage=await cloudinary.uploader.upload(profilepic);
+        const updatedUser=await User.findByIdAndUpdate(userId,{
+        profilepic:uploadImage.secure_url,
+        },{new:true})
+        res.status(200).json({message:"Profile updated successfully", user:updatedUser});
+    }
+    catch(error){
+        console.log("Error in updating profile:", error.message);
+        res.status(500).json({message:"Internal server error"});
+    }
 }
