@@ -32,3 +32,26 @@ export const getAllMessages=async(req,res)=>{
     }
 };
 
+export const sendMessage=async(req,res)=>{
+    try{
+        const {messageText,image}=req.body;
+        const senderId=req.user._id;
+        const receiverId=req.params._id;
+        let imageUrl="";
+        if(image){
+            const uploadImage=await cloudinary.uploader.upload(image)
+            imageUrl=uploadImage.secure_url;
+        }
+        const newMessage=new Message({
+            senderId,
+            receiverId,
+            messageText,
+            image:imageUrl
+        });
+        await newMessage.save();
+        res.status(201).json({message:"Message sent successfully", newMessage});    
+    } catch(error){
+        console.log("Error in sending message:",error.message);
+        res.status(500).json({message:"Internal server error"});
+    }
+}
