@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import authRoute from './routes/authRoute.js';
@@ -11,6 +12,10 @@ const port = process.env.PORT || 5000;
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
