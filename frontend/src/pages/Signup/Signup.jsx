@@ -1,8 +1,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { authStore } from "../../store/authStore";
+import authStore from "../../store/chatStore";
 
-const SignUpPage = () => {
+const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -104,4 +104,4 @@ const SignUpPage = () => {
     </div>
   );
 };
-export default SignUpPage;
+export default Signup;
